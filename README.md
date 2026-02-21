@@ -24,3 +24,6 @@ npm start
 cd backend
 pip install fastapi uvicorn
 python -m uvicorn main:app --reload
+
+**LIVE DEMO**
+https://vector-shift-pipeline-builder-git-main-dcodez101s-projects.vercel.app/
