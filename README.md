@@ -1,4 +1,4 @@
-# VectorShift Pipeline Builder
+# FlowForge -- AI Workflow Builder
 
 A drag-and-drop AI pipeline editor built with React and FastAPI.
 
