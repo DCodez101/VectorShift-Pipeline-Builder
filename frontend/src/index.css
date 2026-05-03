@@ -1,144 +1,138 @@
-/* index.css */
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --bg-base: #080c14;
-  --bg-surface: #0e1420;
-  --bg-elevated: #141c2e;
-  --bg-card: #1a2338;
-  --border: #1e2d45;
-  --border-bright: #2a3f5f;
-  --text-primary: #e8edf5;
-  --text-secondary: #7a8fad;
+  --font-body: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg-base: #07090f;
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-bg-hover: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.09);
+  --glass-border-bright: rgba(255,255,255,0.18);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  --glass-shadow-lg: 0 24px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07);
+  --text-primary: #eef2ff;
+  --text-secondary: #8899bb;
   --text-muted: #3d5070;
-  --accent-cyan: #00d4ff;
-  --accent-blue: #3b82f6;
-  --accent-purple: #8b5cf6;
-  --accent-green: #10b981;
-  --accent-red: #ef4444;
-  --accent-amber: #f59e0b;
-  --accent-pink: #ec4899;
-  --accent-orange: #f97316;
-  --glow-cyan: rgba(0, 212, 255, 0.15);
-  --glow-blue: rgba(59, 130, 246, 0.15);
+  --accent-primary: #6ee7f7;
+  --accent-secondary: #a78bfa;
+  --accent-green: #34d399;
+  --accent-red: #f87171;
+  --accent-amber: #fbbf24;
+  --accent-blue: #60a5fa;
+  --edge-color: rgba(110,231,247,0.45);
+  --canvas-dot: rgba(255,255,255,0.05);
+  --backdrop: blur(24px) saturate(160%);
+  --scrollbar: rgba(255,255,255,0.1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+[data-theme="light"] {
+  --bg-base: #e8edf8;
+  --glass-bg: rgba(255,255,255,0.6);
+  --glass-bg-hover: rgba(255,255,255,0.8);
+  --glass-border: rgba(99,102,241,0.14);
+  --glass-border-bright: rgba(99,102,241,0.28);
+  --glass-shadow: 0 8px 32px rgba(99,102,241,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
+  --glass-shadow-lg: 0 24px 64px rgba(99,102,241,0.16), inset 0 1px 0 rgba(255,255,255,1);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --accent-primary: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --accent-green: #059669;
+  --accent-red: #dc2626;
+  --accent-amber: #d97706;
+  --accent-blue: #2563eb;
+  --edge-color: rgba(99,102,241,0.5);
+  --canvas-dot: rgba(99,102,241,0.1);
+  --scrollbar: rgba(99,102,241,0.18);
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   background: var(--bg-base);
   color: var(--text-primary);
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
   height: 100vh;
+  transition: background 0.4s, color 0.3s;
 }
 
-/* ReactFlow canvas background override */
-.react-flow {
-  background: var(--bg-base) !important;
+/* Animated mesh background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 15% 5%, rgba(110,231,247,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 90% at 85% 85%, rgba(167,139,250,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 55% at 55% 35%, rgba(52,211,153,0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: meshDrift 18s ease-in-out infinite alternate;
+}
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(ellipse 90% 70% at 15% 5%, rgba(99,102,241,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 90% at 85% 85%, rgba(139,92,246,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 55% at 55% 35%, rgba(16,185,129,0.08) 0%, transparent 50%);
+}
+@keyframes meshDrift {
+  0%   { transform: scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1.06) rotate(2.5deg); opacity: 0.75; }
 }
 
-.react-flow__background {
-  background: var(--bg-base) !important;
-}
+/* ReactFlow */
+.react-flow { background: transparent !important; position: relative; z-index: 1; }
+.react-flow__background { background: transparent !important; }
+.react-flow__background pattern circle { fill: var(--canvas-dot) !important; }
 
-.react-flow__background pattern circle {
-  fill: #1a2440 !important;
-}
-
-/* Controls */
 .react-flow__controls {
-  background: var(--bg-elevated) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 10px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--backdrop) !important;
+  -webkit-backdrop-filter: var(--backdrop) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--glass-shadow) !important;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important;
 }
-
 .react-flow__controls-button {
-  background: var(--bg-elevated) !important;
-  border-bottom: 1px solid var(--border) !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--glass-border) !important;
   color: var(--text-secondary) !important;
   transition: all 0.2s !important;
 }
+.react-flow__controls-button:last-child { border-bottom: none !important; }
+.react-flow__controls-button:hover { background: var(--glass-bg-hover) !important; color: var(--accent-primary) !important; }
+.react-flow__controls-button svg { fill: currentColor !important; }
 
-.react-flow__controls-button:hover {
-  background: var(--bg-card) !important;
-  color: var(--accent-cyan) !important;
-}
-
-.react-flow__controls-button svg {
-  fill: currentColor !important;
-}
-
-/* MiniMap */
 .react-flow__minimap {
-  background: var(--bg-elevated) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 10px !important;
-  overflow: hidden;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--backdrop) !important;
+  -webkit-backdrop-filter: var(--backdrop) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 14px !important;
 }
 
-/* Edges */
-.react-flow__edge-path {
-  stroke: var(--accent-cyan) !important;
-  stroke-width: 1.5 !important;
-  opacity: 0.6;
-}
+.react-flow__edge-path { stroke: var(--edge-color) !important; stroke-width: 2 !important; }
+.react-flow__edge.animated .react-flow__edge-path { stroke-dasharray: 8 4; animation: dash 2s linear infinite; }
+.react-flow__connection-path { stroke: var(--accent-primary) !important; stroke-width: 2 !important; opacity: 0.8; }
+.react-flow__node.selected > div { outline: 2px solid var(--accent-primary) !important; outline-offset: 3px; border-radius: 16px; }
 
-.react-flow__edge.animated .react-flow__edge-path {
-  stroke-dasharray: 6 3;
-  animation: dash 1.5s linear infinite;
-}
-
-@keyframes dash {
-  to { stroke-dashoffset: -18; }
-}
-
-/* Connection line */
-.react-flow__connection-path {
-  stroke: var(--accent-cyan) !important;
-  stroke-width: 1.5 !important;
-}
-
-/* Node selection */
-.react-flow__node.selected > div {
-  box-shadow: 0 0 0 2px var(--accent-cyan), 0 0 24px var(--glow-cyan) !important;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 2px; }
 
-/* Input / Select resets */
-input, select, textarea {
-  font-family: 'DM Sans', sans-serif;
+input, select, textarea { font-family: var(--font-body); color: var(--text-primary); }
+select option { background: var(--bg-base); color: var(--text-primary); }
+
+@keyframes dash { to { stroke-dashoffset: -24; } }
+@keyframes pulse-run {
+  0%,100% { box-shadow: 0 0 0 2px rgba(96,165,250,0.2), var(--glass-shadow); }
+  50%      { box-shadow: 0 0 0 8px rgba(96,165,250,0.25), 0 0 30px rgba(96,165,250,0.12); }
 }
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--accent-cyan) !important;
-  box-shadow: 0 0 0 2px var(--glow-cyan) !important;
-}
-
-select option {
-  background: var(--bg-elevated);
-  color: var(--text-primary);
-}
-
-/* Animations */
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 6px var(--glow-cyan); }
-  50%       { box-shadow: 0 0 18px var(--glow-cyan); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }

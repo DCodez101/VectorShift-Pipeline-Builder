@@ -1,0 +1,127 @@
+{
+  "68daddf9": {
+    "name": "dhsjsn",
+    "nodes": [
+      {
+        "id": "customInput-1",
+        "type": "customInput",
+        "position": {
+          "x": -696.3215999999995,
+          "y": -154.06751999999994
+        },
+        "data": {
+          "id": "customInput-1",
+          "nodeType": "customInput",
+          "value": "What is the capital of France?"
+        },
+        "width": 220,
+        "height": 239,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -696.3215999999995,
+          "y": -154.06751999999994
+        }
+      },
+      {
+        "id": "text-1",
+        "type": "text",
+        "position": {
+          "x": -418.87391999999977,
+          "y": -85.63871999999995
+        },
+        "data": {
+          "id": "text-1",
+          "nodeType": "text"
+        },
+        "width": 214,
+        "height": 148,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -418.87391999999977,
+          "y": -85.63871999999995
+        },
+        "dragging": false
+      },
+      {
+        "id": "customOutput-1",
+        "type": "customOutput",
+        "position": {
+          "x": 190.76448000000013,
+          "y": -53.29055999999995
+        },
+        "data": {
+          "id": "customOutput-1",
+          "nodeType": "customOutput"
+        },
+        "width": 220,
+        "height": 180
+      },
+      {
+        "id": "llm-1",
+        "type": "llm",
+        "position": {
+          "x": -126.49631999999977,
+          "y": -79.41791999999995
+        },
+        "data": {
+          "id": "llm-1",
+          "nodeType": "llm"
+        },
+        "width": 220,
+        "height": 318,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -126.49631999999977,
+          "y": -79.41791999999995
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "customInput-1",
+        "sourceHandle": "customInput-1-value",
+        "target": "text-1",
+        "targetHandle": "text-1-input",
+        "type": "smoothstep",
+        "animated": true,
+        "markerEnd": {
+          "type": "arrowclosed",
+          "height": 16,
+          "width": 16
+        },
+        "id": "reactflow__edge-customInput-1customInput-1-value-text-1text-1-input"
+      },
+      {
+        "source": "text-1",
+        "sourceHandle": "text-1-output",
+        "target": "llm-1",
+        "targetHandle": "llm-1-prompt",
+        "type": "smoothstep",
+        "animated": true,
+        "markerEnd": {
+          "type": "arrowclosed",
+          "height": 16,
+          "width": 16
+        },
+        "id": "reactflow__edge-text-1text-1-output-llm-1llm-1-prompt"
+      },
+      {
+        "source": "llm-1",
+        "sourceHandle": "llm-1-response",
+        "target": "customOutput-1",
+        "targetHandle": "customOutput-1-value",
+        "type": "smoothstep",
+        "animated": true,
+        "markerEnd": {
+          "type": "arrowclosed",
+          "height": 16,
+          "width": 16
+        },
+        "id": "reactflow__edge-llm-1llm-1-response-customOutput-1customOutput-1-value"
+      }
+    ],
+    "slug": "68daddf9"
+  }
+}
