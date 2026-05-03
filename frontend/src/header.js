@@ -115,7 +115,7 @@ export const Header = () => {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [undo, redo, exportPipeline]);
+  }, [undo, redo, exportPipeline, handleSave]);
 
   const handleSave = async () => {
     const result = await savePipeline();
