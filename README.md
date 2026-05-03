@@ -12,8 +12,8 @@
 
 ## 🌐 Live Demo
 
-**Frontend:** [flowforge-ai.vercel.app](https://flowforge-ai.vercel.app)  
-**Backend API:** [flowforge-api.onrender.com](https://flowforge-api.onrender.com)
+**Frontend:** [flowforge-pipeline.vercel.app](https://flowforge-pipeline.vercel.app)  
+**Backend API:** [flowforge-api-rmqa.onrender.com](https://flowforge-api-rmqa.onrender.com)
 
 ---
 
